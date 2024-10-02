@@ -15,6 +15,7 @@ import MapScreen from './screens/MapScreen';
 import AllFavouritePlaces from './screens/AllFavouritePlaces';
 import Addplace from './screens/AddPlace';
 import IconButton from './components/UI/iconButton';
+import MessageScreen from './screens/MessageScreen';
 
 const Stack = createStackNavigator();
 
@@ -44,9 +45,11 @@ export default function App() {
             <Stack.Screen name="ScheduleScreen" component={ScheduleScreen} />
             <Stack.Screen name="AllWalks" component={AllWalksScreen} />
             <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }}/>
-            <Stack.Screen name="AllFavouritePlaces" component={AllFavouritePlaces} options={({ navigation }) => {
+            <Stack.Screen name="Message" component={MessageScreen} />
+
+            {/* <Stack.Screen name="AllFavouritePlaces" component={AllFavouritePlaces} options={({ navigation }) => {
                headerRight: ({tintColor}) => <IconButton icon="add" size={24} color={tintColor} onPress={() => navigation.navigate('AddPlace')}/> 
-            }}/>
+            }}/> */}
             
           </>
         ) : (

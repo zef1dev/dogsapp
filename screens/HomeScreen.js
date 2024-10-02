@@ -82,9 +82,9 @@ export default function HomeScreen({ navigation }) {
   const handleViewAllFavPlaces = () => {
     navigation.navigate('AllFavouritePlaces');
   };
-  const handleAddPlace = () => {
-    navigation.navigate('AddPlace');
-  }
+  // const handleAddPlace = () => {
+  //   navigation.navigate('AddPlace');
+  // }
 
 
   if (loading) {
@@ -110,56 +110,60 @@ export default function HomeScreen({ navigation }) {
     <View>
       <View style={styles.welcomeHi}>
         <Text style={styles.title}>Hi, {userData.name}!</Text>
-        <TouchableOpacity onPress={handleEditProfile}>
-        <Text style={styles.linkText}>Edit Profile</Text>
-      </TouchableOpacity>
-      </View>
-   
-    <ScrollView contentContainerStyle={styles.mainContainer}>
-      
-      <View style={styles.infoContainerPet}>
-        <Text style={styles.headerThree}>Your pets</Text>
-        <View style={styles.petCard}>
-          <Image source={require('../assets/dog-profile.png')} style={styles.dogProfileImg} />
-          <Text style={styles.dogNameText}>{userData.dogName}</Text>
-          <Text style={styles.petInfoText}>{userData.dogBreed}</Text>
-          <Text style={styles.petInfoText}>{userData.dogDOB}</Text>
-        </View>
+        {/* <TouchableOpacity onPress={handleEditProfile}>
+          <Text style={styles.linkText}>Edit Profile</Text>
+        </TouchableOpacity> */}
       </View>
 
-      <View style={styles.infoContainer}>
-       
-        <Text style={styles.headerThree}>Next Planned Walks</Text>
-        {nextWalk ? (
-          <View style={styles.walkCard}>
-            <Text style={styles.infoText}>Date: {nextWalk.date}</Text>
-            <Text style={styles.infoText}>Time: {nextWalk.time}</Text>
-            {nextWalk.notes && <Text style={styles.infoText}>Notes: {nextWalk.notes}</Text>}
+      <ScrollView contentContainerStyle={styles.mainContainer}>
+
+        <View style={styles.infoContainerPet}>
+          <Text style={styles.headerThree}>Your pets</Text>
+          <View style={styles.petCard}>
+            <Image source={require('../assets/dog-profile.png')} style={styles.dogProfileImg} />
+            <Text style={styles.dogNameText}>{userData.dogName}</Text>
+            <Text style={styles.petInfoText}>{userData.dogBreed}</Text>
+            <Text style={styles.petInfoText}>{userData.dogDOB}</Text>
           </View>
-        ) : (
-          <Text style={styles.walksInfoText}>No upcoming walks scheduled</Text>
-        )}
-      <TouchableOpacity onPress={handleViewAllFavPlaces}>
+        </View>
+
+        <View style={styles.infoContainer}>
+
+          <Text style={styles.headerThree}>Next Planned Walks</Text>
+          {nextWalk ? (
+            <View style={styles.walkCard}>
+              <Text style={styles.infoText}>Date: {nextWalk.date}</Text>
+              <Text style={styles.infoText}>Time: {nextWalk.time}</Text>
+              {nextWalk.notes && <Text style={styles.infoText}>Notes: {nextWalk.notes}</Text>}
+            </View>
+          ) : (
+            <Text style={styles.walksInfoText}>No upcoming walks scheduled</Text>
+          )}
+          {/* <TouchableOpacity onPress={handleViewAllFavPlaces}>
         <Text style={styles.headerThree}>Your favourite places to walk</Text>
-      </TouchableOpacity>
-            <TouchableOpacity onPress={handleAddPlace}>
+      </TouchableOpacity> */}
+          {/* <TouchableOpacity onPress={handleAddPlace}>
         <Text style={styles.linkText}>Add new place</Text>
-      </TouchableOpacity>
-      </View>
+      </TouchableOpacity> */}
+        </View>
 
 
-      <TouchableOpacity style={styles.button} onPress={handleSchedule}>
-        <Text style={styles.buttonText}>Schedule Walks</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleSchedule}>
+          <Text style={styles.buttonText}>Schedule Walks</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={handleViewAllWalks}>
-        <Text style={styles.buttonText}>View All Walks</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleViewAllWalks}>
+          <Text style={styles.buttonText}>View All Walks</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleLogout}>
-        <Text style={styles.linkText}>Logout</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <TouchableOpacity style={styles.linkButton} onPress={handleEditProfile}>
+          <Text style={styles.linkText}>Edit Profile</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.linkButton} onPress={handleLogout}>
+          <Text style={styles.linkText}>Logout</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }
@@ -186,10 +190,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#efd39b', //yellow
     paddingTop: 70,
     position: 'absolute',
-    top:0,
-    left:0,
+    top: 0,
+    left: 0,
     height: '100%',
-    paddingHorizontal:20,
+    paddingHorizontal: 20,
   },
   title: {
     color: '#333',
@@ -206,7 +210,7 @@ const styles = StyleSheet.create({
   infoContainerPet: {
     marginBottom: 20,
     width: '50%',
-    alignContent:'center'
+    alignContent: 'center'
   },
   infoText: {
     fontSize: 16,
@@ -223,7 +227,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: '#333',
   },
-  dogNameText:{
+  dogNameText: {
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 10,
@@ -244,9 +248,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   linkText: {
-    color:'#828fff',
+    color: '#828fff',
     fontSize: 16,
-    fontWeight: 'bold',  },
+    fontWeight: 'bold',
+  },
   headerThree: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -267,13 +272,19 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 10,
-   
+
   },
   dogProfileImg: {
     width: 50,
     height: 50,
     marginRight: 10,
     borderRadius: 25,
+  },
+  linkButton: {
+    marginBottom: 10,
+    marginTop: 20,
+    justifyContent: 'flex-center',
+
   }
-  
+
 });

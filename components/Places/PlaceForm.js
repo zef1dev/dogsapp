@@ -1,4 +1,5 @@
-import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { ScrollView, TextInput, View, Text, StyleSheet} from "react-native";
+
 import ImagePicker from "./ImagePicker";
 
 function PlaceForm() {

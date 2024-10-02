@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity, Text } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Text, Alert } from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import { db, auth } from '../firebaseConfig';
 
 export default function MapScreen({ navigation }) {
   const [region, setRegion] = useState(null);
@@ -47,6 +47,14 @@ export default function MapScreen({ navigation }) {
     }
   };
 
+  const handleJoinWalk = (walk) => {
+    if (walk.userId === auth.currentUser.uid) {
+      Alert.alert("Can't Join", "This is your own walk!");
+    } else {
+      navigation.navigate('Message', { walkId: walk.id, walkOwner: walk.userName });
+    }
+  };
+
   if (!region) {
     return <View style={styles.container}><Text>Loading map...</Text></View>;
   }
@@ -63,7 +71,15 @@ export default function MapScreen({ navigation }) {
             coordinate={walk.coordinate}
             title={walk.userName}
             description={`${walk.date} at ${walk.time}`}
-          />
+          >
+            <Callout onPress={() => handleJoinWalk(walk)}>
+              <View>
+                <Text>{walk.userName}'s Walk</Text>
+                <Text>{walk.date} at {walk.time}</Text>
+                <Text style={styles.joinText}>Tap to join!</Text>
+              </View>
+            </Callout>
+          </Marker>
         ))}
       </MapView>
       <TouchableOpacity 
@@ -75,6 +91,7 @@ export default function MapScreen({ navigation }) {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -98,6 +115,10 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
+    fontWeight: 'bold',
+  },
+  joinText: {
+    color: 'blue',
     fontWeight: 'bold',
   },
 });

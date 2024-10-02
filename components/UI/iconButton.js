@@ -1,4 +1,4 @@
-import { Pressable } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
 function IconButton({icon, size, color, onPress}) {
     return <Pressable 
